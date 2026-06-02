@@ -64,7 +64,7 @@ La siguiente tabla resume las diferencias más relevantes (a mi criterio). El s�
 * La **Propuesta 1** se descartó porque es la más básica y no aprovecha una organización más inteligente de la información. 
 * La **Propuesta 4** resulta muy similar a la 1 cuando se implementa con listas enlazadas. 
 * La **Propuesta 3** (no incluida en la tabla) requiere convertir estados y símbolos a índices enteros, lo que rompe el uso natural de `str` y `Tdata`. 
-* La **Propuesta 5** es interesante pero está pensada solo para la etapa de conversión y agrega una complejidad de diseño que no se justifica, ya que la conversión puede resolverse con la Propuesta 2.
+* La **Propuesta 5** es interesante pero creo que está pensada solo para la etapa de conversión y agrega cierta complejidad de diseño ya que la conversión puede resolverse con la Propuesta 2.
 
 ---
 

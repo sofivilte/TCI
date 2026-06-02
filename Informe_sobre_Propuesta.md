@@ -1,6 +1,6 @@
-# 📋 Selección de Propuesta para el Modelado de Autómatas Finitos
+# Selección de Propuesta para el Modelado de Autómatas Finitos
 
-## 🔹 Propuesta Elegida: **Delta Indexado por Estado (Propuesta 2)**
+## Propuesta Elegida: **Delta Indexado por Estado (Propuesta 2)**
 
 ---
 
@@ -29,22 +29,22 @@ Entonces, para consultar $\delta(q, a)$ el proceso sería en dos pasos:
 
 Esto es mucho más ordenado que recorrer una lista enorme con todas las transiciones mezcladas. Cada estado es responsable de sus propias transiciones, lo que refleja directamente la idea del grafo para dibujar un autómata.
 
-> 💡 **Ventaja importante:** El campo de estado destino dentro de cada transición puede ser tanto un único estado como un conjunto de estados, sin cambiar la estructura. Eso permite modelar tanto AFD como AFND con la misma base.
+> **Ventaja importante:** El campo de estado destino dentro de cada transición puede ser tanto un único estado como un conjunto de estados, sin cambiar la estructura. Eso permite modelar tanto AFD como AFND con la misma base.
 
 ---
 
 ## 3. Por qué la elegí
 
-### 🔄 Encaja con la forma en que programo
+### Encaja con la forma en que programo
 Durante el proyecto aprendí que me resulta más natural resolver problemas con recursión. Buscar el estado $q$ en una lista y luego buscar el símbolo $a$ en la lista de transiciones de ese estado son dos problemas que se pueden resolver cada uno con su propia función recursiva, con su caso base claro. En el proyecto del año pasado, porque soy recursante, realicé en conjunto con mi grupo funciones como `hat_delta` ($\hat{\delta}$) y `tabla_transiciones` que siguieron exactamente esa lógica, y funcionaron bien. La Propuesta 2 me permite mantener ese estilo, cambiando el enfoque de lo que hacía la propuesta 1, que es prácticamente la que desarrollé el año pasado.
 
-### 🧩 Se integra con lo que ya tengo
+### Se integra con lo que ya tengo
 El proyecto ya tiene implementado el tipo `Tdata` con `STR`, `SET` y `LIST`. Los nombres de los estados son `str`, los conjuntos de estados destino son `SET`, y las listas de estados y transiciones son listas enlazadas, que es el tipo de estructura con la que ya trabajamos. No hace falta inventar nada nuevo desde cero, la Propuesta 2 se apoya en lo que ya existe.
 
-### ⚡ Es más eficiente que la Propuesta 1
+### Es más eficiente que la Propuesta 1
 En la Propuesta 1, para consultar $\delta$ hay que recorrer toda la lista de transiciones del autómata. En la Propuesta 2, la búsqueda queda limitada a las transiciones del estado que se está procesando. Esto quizá importa especialmente en la conversión de AFND a AFD, donde se consulta $\delta$ muchas veces y el autómata puede tener bastantes transiciones.
 
-### 📈 Se adapta bien a la conversión AFND a AFD
+### Se adapta bien a la conversión AFND a AFD
 Para convertir un AFND a AFD necesitamos aplicar $\delta$ sobre conjuntos de estados y acumular los destinos. Con esta propuesta, podemos consultar la $\delta$ de cada estado del conjunto de forma independiente y luego unir los resultados usando las operaciones de `SET` que ya están implementadas. No necesitamos cambiar la estructura para soportar esto.
 
 ---
